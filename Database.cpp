@@ -18,6 +18,6 @@ string Database::getUsername(){
     return username;
 }
 
-string Database::getUsername(){
+string Database::getPassword(){
     return password;
 }
