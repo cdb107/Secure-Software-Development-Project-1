@@ -13,4 +13,7 @@ REPLACE THIS WITH EXPLANATION OF FILE
 void createUser(Database& database);
 void loginUser(const Database& database);
 
+string getHiddenPassword();
+void getLoginInput(string& username, string& password);
+
 #endif

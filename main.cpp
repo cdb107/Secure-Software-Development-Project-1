@@ -24,5 +24,9 @@ int main(){
         return 1;
     }
 
+    string enteredUsername;
+    string enteredPassword;
+    getLoginInput(enteredUsername, enteredPassword);
+
     return 0;
 }
