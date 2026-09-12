@@ -23,4 +23,6 @@ class Database{
         string getPassword();
 };
 
+bool saveUsersToFile(Database users[], int size);
+
 #endif

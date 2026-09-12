@@ -1,3 +1,4 @@
+#include <iostream> 
 #include "Database.h"
 #include "usercreation.h"
 #include "Validation.h"
@@ -17,6 +18,11 @@ int main(){
         Database("engineer", "Engineer2"),
         Database("security", "Security3")
     };
+
+    if (!saveUsersToFile(users, 3)) {
+        cout << "Application failed." << endl;
+        return 1;
+    }
 
     return 0;
 }
