@@ -26,5 +26,15 @@ int main() {
     cout << "Prohibited character: " << validation.validate("Password-1") << endl;
     cout << "Invalid password policy: " << validation.validate("password1") << endl;
 
+    cout << "\nMFA integer validation tests:\n";
+    
+    cout << "Valid 10-digit number: " << validation.integerOverflowCheck("1234567890") << endl;
+    cout << "Maximum signed integer: " << validation.integerOverflowCheck("2147483647") << endl;
+    cout << "Integer overflow: " << validation.integerOverflowCheck("2147483648") << endl;
+    cout << "Only 9 digits: " << validation.integerOverflowCheck("123456789") << endl;
+    cout << "More than 10 digits: " << validation.integerOverflowCheck("12345678901") << endl;
+    cout << "Contains letters: " << validation.integerOverflowCheck("12345abcde") << endl;
+    cout << "Leading zero: " << validation.integerOverflowCheck("0123456789") << endl;
+
     return 0;
 }

@@ -24,6 +24,7 @@ class Validation{
         bool validate(string password);
         bool SQLInjectionCheck(string input);
         bool passwordPolicyCheck(string input);
+        bool integerOverflowCheck(string input);
 };
 
 #endif
