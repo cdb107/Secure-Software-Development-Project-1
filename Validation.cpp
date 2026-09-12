@@ -1,4 +1,5 @@
 #include "Validation.h"
+#include <climits>
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
@@ -34,6 +35,25 @@ bool Validation::passwordPolicyCheck(string input) {
     if (!hasInt(input)) {return false;}
 
     return true;
+}
+
+bool Validation::integerOverflowCheck(string input) {
+    if (input.length() != 10) {
+        return false;
+    }
+
+    for (unsigned int i = 0; i < input.length(); ++i) {
+        if (!isdigit(input.at(i))) {return false;}
+    }
+    if (input.at(0) == '0') {return false;}
+
+    long long number = stoll(input);
+    if (number > INT_MAX) {return false;}
+
+    signed int mfaToken = static_cast<signed int>(number);
+    if (mfaToken < 1000000000) {return false;}
+
+    return true;    
 }
 
 bool Validation::validate(string password){
