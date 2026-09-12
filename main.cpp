@@ -12,5 +12,11 @@ REPLACE THIS WITH EXPLANATION OF FILE
 */
 
 int main(){
+    Database users[3] = {
+        Database("scientist", "Scientist1"),
+        Database("engineer", "Engineer2"),
+        Database("security", "Security3")
+    };
 
+    return 0;
 }
