@@ -9,18 +9,29 @@ REPLACE THIS WITH EXPLANATION OF FILE
 @version 1.0
 */
 
+Validation::Validation(string password) {
+    this->password = password;
+}
+
+bool Validation::SQLInjectionCheck(string input){
+    for(unsigned int i = 0; i < input.length(); ++i){
+        for (unsigned int j = 0; j < 4; ++j){
+            if (input.at(i) == unallowed[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 bool Validation::validate(string password){
     if (password.length() < 8 || password.length() > 12){
         return false;
     }
 
-    for (unsigned int i = 0; i < 4; ++i){
-        for (unsigned int j = 0; i < password.length(); ++j){
-            if (unallowed[i] == password.at(j)){
-                return false;
-            }
-        }
-    }
+    if (!SQLInjectionCheck(password)) {
+    return false;
+}
 
     if (!hasUpper(password)){return false;}
     if (!hasLower(password)){return false;}

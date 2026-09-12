@@ -22,6 +22,7 @@ class Validation{
     public:
         Validation(string password);
         bool validate(string password);
+        bool SQLInjectionCheck(string input);
 };
 
 #endif
