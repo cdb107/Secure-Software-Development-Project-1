@@ -24,19 +24,27 @@ bool Validation::SQLInjectionCheck(string input){
     return true;
 }
 
-bool Validation::validate(string password){
-    if (password.length() < 8 || password.length() > 12){
+bool Validation::passwordPolicyCheck(string input) {
+    if (input.length() < 8 || input.length() > 12) {
         return false;
     }
 
-    if (!SQLInjectionCheck(password)) {
-    return false;
+    if (!hasUpper(input)) {return false;}
+    if (!hasLower(input)) {return false;}
+    if (!hasInt(input)) {return false;}
+
+    return true;
 }
 
-    if (!hasUpper(password)){return false;}
-    if (!hasLower(password)){return false;}
-    if (!hasInt(password)){return false;}
+bool Validation::validate(string password){
+    if (!SQLInjectionCheck(password)) {
+        return false;
+    }
 
+    if (!passwordPolicyCheck(password)) {
+        return false;
+    }
+    
     return true;
 }
 
@@ -57,15 +65,15 @@ bool Validation::hasLower(string password){
         }
     }
     cout << "Password must include at least one lowercase letter.\n";
-    return false;;
+    return false;
 }
 
-bool Validation::hasInt(string password){
-    for (unsigned int i = 0; i < password.length(); ++i){
-        if (isdigit(password.at(i))){
+bool Validation::hasInt(string password) {
+    for (unsigned int i = 0; i < password.length(); ++i) {
+        if (isdigit(password.at(i))) {
             return true;
         }
     }
-    cout << "Password must include at least one digit.\n";
+
     return false;
 }

@@ -23,6 +23,7 @@ class Validation{
         Validation(string password);
         bool validate(string password);
         bool SQLInjectionCheck(string input);
+        bool passwordPolicyCheck(string input);
 };
 
 #endif
