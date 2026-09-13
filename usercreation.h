@@ -11,8 +11,7 @@ REPLACE THIS WITH EXPLANATION OF FILE
 @version 1.0
 */
 void createUser(Database& database);
-void loginUser(const Database& database);
-
+bool loginUser(Database users[], int size, string username, string password, string mfaInput);
 string getHiddenPassword();
 void getLoginInput(string& username, string& password);
 

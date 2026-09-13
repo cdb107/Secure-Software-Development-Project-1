@@ -1,6 +1,7 @@
 #include "usercreation.h"
-#include <conio.h>
 #include <iostream>
+#include <conio.h>
+#include "Validation.h"
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
@@ -36,4 +37,23 @@ void getLoginInput(string& username, string& password) {
 
     cout << "Password: ";
     password = getHiddenPassword();
+}
+
+bool loginUser(Database users[], int size, string username, string password, string mfaInput) {
+    Validation validation("");
+
+    if (!validation.SQLInjectionCheck(username)) {return false;}
+
+    if (!validation.validate(password)) {return false;}
+
+    if (!validation.integerOverflowCheck(mfaInput)) {return false;}
+
+    for (int i = 0; i < size; ++i) {
+        if (username == users[i].getUsername() &&
+            password == users[i].getPassword()) {
+            return true;
+        }
+    }
+
+    return false;
 }
