@@ -27,6 +27,11 @@ int main(){
     string enteredUsername;
     string enteredPassword;
     getLoginInput(enteredUsername, enteredPassword);
+    string enteredMfaToken;
+
+    cout << "MFA Token: ";
+    getline(cin, enteredMfaToken);
+    bool loginSuccessful = loginUser(users, 3, enteredUsername, enteredPassword, enteredMfaToken);
 
     return 0;
 }
