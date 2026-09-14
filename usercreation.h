@@ -4,13 +4,14 @@
 #include "Database.h"
 /**
 CEN 4078 Programming Exercise 1
-File Name: 
+File Name: usercreation.h
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file delcares the user input, user authentication, and hidden password methods
+used to log in securely.
+
+@author Calvin Brewer
 @version 1.0
 */
-void createUser(Database& database);
 bool loginUser(Database users[], int size, string username, string password, string mfaInput);
 string getHiddenPassword();
 void getLoginInput(string& username, string& password);
