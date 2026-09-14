@@ -2,6 +2,7 @@
 #define VALIDATION_H
 #include <string>
 #include <iostream>
+#include "Validation.h"
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
