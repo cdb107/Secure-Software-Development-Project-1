@@ -5,10 +5,11 @@
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
-File Name: 
+File Name: usercreation.cpp
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file handles the login prompt, input validation, hidden password, and credentail comparison.
+
+@author Calvin Brewer
 @version 1.0
 */
 //Below Method made with the assistance of AI 
@@ -40,7 +41,7 @@ void getLoginInput(string& username, string& password) {
 }
 
 bool loginUser(Database users[], int size, string username, string password, string mfaInput) {
-    Validation validation("");
+    Validation validation;
 
     if (!validation.SQLInjectionCheck(username)) {return false;}
 

@@ -8,8 +8,10 @@ using namespace std;
 CEN 4078 Programming Exercise 1
 File Name: main.cpp
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file creates the user database, write the credentials file,, collets 
+login information, authenticates the user, and displays a safe success or fail message.
+
+@author Calvin Brewer
 @version 1.0
 */
 

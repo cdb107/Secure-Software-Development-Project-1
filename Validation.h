@@ -2,14 +2,15 @@
 #define VALIDATION_H
 #include <string>
 #include <iostream>
-#include "Validation.h"
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
-File Name: 
+File Name: Validation.h
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file declares the Validation class and the SQl Injection, password policy, 
+and integer overflow methods.
+
+@author Calvin Brewer
 @version 1.0
 */
 
@@ -19,9 +20,7 @@ class Validation{
         bool hasUpper(string password);
         bool hasLower(string password);
         bool hasInt(string password);
-        string password;
     public:
-        Validation(string password);
         bool validate(string password);
         bool SQLInjectionCheck(string input);
         bool passwordPolicyCheck(string input);

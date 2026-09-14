@@ -5,10 +5,12 @@
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
-File Name: 
+File Name: Database.h
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file declares the Database class and the file-output 
+function used to store usernames and passwords.
+
+@author Calvin Brewer
 @version 1.0
 */
 
@@ -17,7 +19,6 @@ class Database{
         string username;
         string password;
     public:
-        Database();
         Database(string username, string password) : username(username), password(password){};
         string getUsername();
         string getPassword();

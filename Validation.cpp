@@ -1,18 +1,17 @@
 #include "Validation.h"
 #include <climits>
+#include <cctype>
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
-File Name: 
+File Name: Validation.cpp
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file handles input validation for any prohibited characters, 
+the password policy requirements, and the MFA tokens.
+
+@author Calvin Brewer
 @version 1.0
 */
-
-Validation::Validation(string password) {
-    this->password = password;
-}
 
 bool Validation::SQLInjectionCheck(string input){
     for(unsigned int i = 0; i < input.length(); ++i){
@@ -74,7 +73,6 @@ bool Validation::hasUpper(string password){
             return true;
         }
     }
-    cout << "Password must include at least one uppercase letter.\n";
     return false;
 }
 
@@ -84,7 +82,6 @@ bool Validation::hasLower(string password){
             return true;
         }
     }
-    cout << "Password must include at least one lowercase letter.\n";
     return false;
 }
 

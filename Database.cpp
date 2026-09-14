@@ -2,17 +2,14 @@
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
-File Name: 
+File Name: Database.cpp
 
-REPLACE THIS WITH EXPLANATION OF FILE
-@author 
+This file writes the credential array to a text file and 
+implements access to those stored usernames and passwords.
+
+@author Calvin Brewer
 @version 1.0
 */
-
-
-// need an array for the passwords and usernames
-//char username[4][50];
-//char password[4][20];
 
 string Database::getUsername(){
     return username;
