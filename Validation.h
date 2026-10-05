@@ -14,13 +14,24 @@ and integer overflow methods.
 @version 1.0
 */
 
+struct PasswordPolicy {
+    unsigned int minimumLength;
+    unsigned int maximumLength;
+    bool requiresUppercase;
+    bool requiresLowercase;
+    bool requiresNumber;
+};
+
 class Validation{
     private:
+        string password;
         char unallowed[4] = {'/','-',';','\"'};
         bool hasUpper(string password);
         bool hasLower(string password);
         bool hasInt(string password);
     public:
+        Validation(string password);
+        PasswordPolicy getPasswordPolicy();
         bool validate(string password);
         bool SQLInjectionCheck(string input);
         bool passwordPolicyCheck(string input);

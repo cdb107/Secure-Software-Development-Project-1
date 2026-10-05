@@ -3,6 +3,7 @@
 #include "usercreation.h"
 #include "Validation.h"
 #include <exception>
+#include "cryptographer.h"
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
@@ -17,10 +18,24 @@ login information, authenticates the user, and displays a safe success or fail m
 
 int main(){
     try { 
+        cout << "Create a password for the scientist account." << endl;
+
+        string scientistPassword = createUserPassword();
+
+        cryptographer crypto;
         Database users[3] = {
-            Database("scientist", "Scientist1"),
-            Database("engineer", "Engineer2"),
-            Database("security", "Security3")
+            Database(
+                crypto.encryptCredential("scientist"),
+                crypto.encryptCredential(scientistPassword)
+            ),
+            Database(
+                crypto.encryptCredential("engineer"),
+                crypto.encryptCredential("Engineer2")
+            ),
+            Database(
+                crypto.encryptCredential("security"),
+                crypto.encryptCredential("Security3")
+            )
         };
 
         if (!saveUsersToFile(users, 3)) {

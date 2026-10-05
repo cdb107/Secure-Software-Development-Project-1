@@ -13,6 +13,22 @@ the password policy requirements, and the MFA tokens.
 @version 1.0
 */
 
+Validation::Validation(string password) {
+    this->password = password;
+}
+
+PasswordPolicy Validation::getPasswordPolicy() {
+    PasswordPolicy policy;
+
+    policy.minimumLength = 8;
+    policy.maximumLength = 12;
+    policy.requiresUppercase = true;
+    policy.requiresLowercase = true;
+    policy.requiresNumber = true;
+
+    return policy;
+}
+
 bool Validation::SQLInjectionCheck(string input){
     for(unsigned int i = 0; i < input.length(); ++i){
         for (unsigned int j = 0; j < 4; ++j){
@@ -25,13 +41,29 @@ bool Validation::SQLInjectionCheck(string input){
 }
 
 bool Validation::passwordPolicyCheck(string input) {
-    if (input.length() < 8 || input.length() > 12) {
+    PasswordPolicy policy = getPasswordPolicy();
+
+    if (input.length() < policy.minimumLength || input.length() > policy.maximumLength) {
         return false;
     }
 
-    if (!hasUpper(input)) {return false;}
-    if (!hasLower(input)) {return false;}
-    if (!hasInt(input)) {return false;}
+    for (unsigned int i = 0; i < input.length(); ++i) {
+        if (!isalnum(input.at(i))) {
+            return false;
+        }
+    }
+
+    if (policy.requiresUppercase && !hasUpper(input)) {
+        return false;
+    }
+
+    if (policy.requiresLowercase && !hasLower(input)) {
+        return false;
+    }
+
+    if (policy.requiresNumber && !hasInt(input)) {
+        return false;
+    }
 
     return true;
 }
