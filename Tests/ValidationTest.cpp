@@ -14,7 +14,7 @@ password policy, Invalid passwords, and MFA integer validation.
 */
 
 int main() {
-    Validation validation;
+    Validation validation("");
 
     cout << "\nSQL Injection tests: " << endl;
     cout << "Normal username: " << validation.SQLInjectionCheck("scientist") << endl;
@@ -30,6 +30,7 @@ int main() {
     cout << "No uppercase: " << validation.passwordPolicyCheck("password1") << endl;
     cout << "No lowercase: " << validation.passwordPolicyCheck("PASSWORD1") << endl;
     cout << "No number: " << validation.passwordPolicyCheck("Password") << endl;
+    cout << "Special character: " << validation.passwordPolicyCheck("Password!1") << endl;
 
     cout << "\nInvalid password validation tests: " << endl;
     cout << "Valid password: " << validation.validate("Password1") << endl;
@@ -44,6 +45,15 @@ int main() {
     cout << "More than 10 digits: " << validation.integerOverflowCheck("12345678901") << endl;
     cout << "Contains letters: " << validation.integerOverflowCheck("12345abcde") << endl;
     cout << "Leading zero: " << validation.integerOverflowCheck("0123456789") << endl;
+
+    cout << "\nReturned password policy:" << endl;
+
+    PasswordPolicy policy = validation.getPasswordPolicy();
+    cout << "Minimum length: " << policy.minimumLength << endl;
+    cout << "Maximum length: " << policy.maximumLength << endl;
+    cout << "Requires uppercase: " << policy.requiresUppercase << endl;
+    cout << "Requires lowercase: " << policy.requiresLowercase << endl;
+    cout << "Requires number: " << policy.requiresNumber << endl;
 
     return 0;
 }
