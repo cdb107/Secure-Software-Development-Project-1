@@ -42,8 +42,7 @@ string PasswordHandler::createUserPassword() {
     Validation validation("");
 
     for (int attempt = 1; attempt <= 2; ++attempt) {
-        cout << "Create password (attempt "
-             << attempt << " of 2): ";
+        cout << "Create password (attempt " << attempt << " of 2): ";
 
         string attemptedPassword = getHiddenPassword();
 
@@ -67,4 +66,8 @@ bool PasswordHandler::validatePassword(string password) {
 string PasswordHandler::encryptPassword(string password) {
     cryptographer crypto;
     return crypto.encryptCredential(password);
+}
+
+bool PasswordHandler::passwordMatches(string password, string storedPassword) {
+    return encryptPassword(password) == storedPassword;
 }

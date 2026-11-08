@@ -4,12 +4,14 @@
 #include "Validation.h"
 #include <exception>
 #include "cryptographer.h"
+#include "PasswordHandler.h"
+
 using namespace std;
 /**
 CEN 4078 Programming Exercise 1
 File Name: main.cpp
 
-This file creates the user database, write the credentials file,, collets 
+This file creates the user database, write the credentials file,, collects 
 login information, authenticates the user, and displays a safe success or fail message.
 
 @author Calvin Brewer
@@ -20,22 +22,14 @@ int main(){
     try { 
         cout << "Create a password for the scientist account." << endl;
 
-        string scientistPassword = createUserPassword();
-
+        PasswordHandler passwordHandler;
+        string scientistPassword = passwordHandler.createUserPassword();
         cryptographer crypto;
+
         Database users[3] = {
-            Database(
-                crypto.encryptCredential("scientist"),
-                crypto.encryptCredential(scientistPassword)
-            ),
-            Database(
-                crypto.encryptCredential("engineer"),
-                crypto.encryptCredential("Engineer2")
-            ),
-            Database(
-                crypto.encryptCredential("security"),
-                crypto.encryptCredential("Security3")
-            )
+            Database( crypto.encryptCredential("scientist"), passwordHandler.encryptPassword(scientistPassword)),
+            Database(crypto.encryptCredential("engineer"), passwordHandler.encryptPassword("Engineer2")),
+            Database(crypto.encryptCredential("security"), passwordHandler.encryptPassword("Security3"))
         };
 
         if (!saveUsersToFile(users, 3)) {
@@ -57,7 +51,7 @@ int main(){
             cout << "Welcome, " << enteredUsername << "!" << endl;
         }
         else {
-                cout << "Login failed." << endl;    
+            cout << "Login failed." << endl;    
         }
 
     }

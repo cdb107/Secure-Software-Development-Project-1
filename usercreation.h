@@ -13,8 +13,6 @@ used to log in securely.
 @version 1.0
 */
 bool loginUser(Database users[], int size, string username, string password, string mfaInput);
-string getHiddenPassword();
 void getLoginInput(string& username, string& password);
-string createUserPassword();
 
 #endif
