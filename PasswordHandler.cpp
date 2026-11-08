@@ -34,19 +34,17 @@ string PasswordHandler::getHiddenPassword() {
     }
 
     cout << endl;
-
     return password;
 }
 
 string PasswordHandler::createUserPassword() {
-    Validation validation("");
 
     for (int attempt = 1; attempt <= 2; ++attempt) {
         cout << "Create password (attempt " << attempt << " of 2): ";
 
         string attemptedPassword = getHiddenPassword();
 
-        if (validation.passwordPolicyCheck(attemptedPassword)) {
+        if (meetsPasswordPolicy(attemptedPassword)) {
             cout << "Password accepted." << endl;
             return attemptedPassword;
         }
@@ -54,13 +52,38 @@ string PasswordHandler::createUserPassword() {
         cout << "Password was not accepted." << endl;
     }
 
-    DefaultPassword defaultPasswordCreator;
-    return defaultPasswordCreator.createDefaultPassword();
+    try {
+        DefaultPassword defaultPasswordCreator;
+
+        string defaultPassword = defaultPasswordCreator.createDefaultPassword();
+ 
+        if (!defaultPasswordIsValid(defaultPassword)) {
+            throw DefaultPasswordException();
+        }
+
+        return defaultPassword;
+    }
+
+    catch (const exception&) {
+        cout << "Unable to create a password." << endl;
+        return "";
+    }
 }
 
 bool PasswordHandler::validatePassword(string password) {
-    Validation validation("");
-    return validation.validate(password);
+    try {
+        Validation validation("");
+
+        if (!validation.validate(password)) {
+            throw PasswordValidationException();
+        }
+
+        return true;
+    }
+
+    catch (const PasswordValidationException&) {
+        return false;
+    }
 }
 
 string PasswordHandler::encryptPassword(string password) {
@@ -70,4 +93,34 @@ string PasswordHandler::encryptPassword(string password) {
 
 bool PasswordHandler::passwordMatches(string password, string storedPassword) {
     return encryptPassword(password) == storedPassword;
+}
+
+bool PasswordHandler::meetsPasswordPolicy(string password) {
+    try {
+        Validation validation("");
+
+        if (!validation.passwordPolicyCheck(password)) {
+            throw PasswordPolicyException();
+        }
+
+        return true;
+    }
+    catch (const PasswordPolicyException&) {
+        return false;
+    }
+}
+
+bool PasswordHandler::defaultPasswordIsValid(string password) {
+    try {
+        Validation validation("");
+
+        if (password.empty() || !validation.passwordPolicyCheck(password)) {
+            throw DefaultPasswordException();
+        }
+
+        return true;
+    }
+    catch (const DefaultPasswordException&) {
+        return false;
+    }
 }

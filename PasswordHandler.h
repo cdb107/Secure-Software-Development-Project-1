@@ -35,9 +35,11 @@ class PasswordHandler {
     public:
         string getHiddenPassword();
         string createUserPassword();
-        bool validatePassword(string password);
         string encryptPassword(string password);
+        bool validatePassword(string password);
         bool passwordMatches(string password, string storedPassword);
+        bool meetsPasswordPolicy(string password);
+        bool defaultPasswordIsValid(string password);
 };
 
 #endif
